@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CampusFlow AI</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f5f7fb;color:#172033}
+.app{display:flex;min-height:100vh}.side{width:245px;background:#111827;color:#fff;padding:22px 14px;position:fixed;inset:0 auto 0 0}
+.logo{font-size:21px;font-weight:800;padding:8px 12px 28px}.logo span{color:#60a5fa}
+.nav button{display:block;width:100%;border:0;background:transparent;color:#cbd5e1;text-align:left;padding:12px 14px;border-radius:10px;margin:4px 0;font-size:14px;cursor:pointer}.nav button:hover,.nav button.active{background:#2563eb;color:#fff}
+.main{margin-left:245px;width:calc(100% - 245px);padding:28px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{margin:0;font-size:27px}.user{background:#fff;border:1px solid #e5e7eb;padding:9px 14px;border-radius:10px}
+.page{display:none}.page.active{display:block}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:#fff;border:1px solid #e5e7eb;border-radius:15px;padding:20px;box-shadow:0 5px 18px #1118270a}.label{color:#64748b;font-size:13px}.num{font-size:30px;font-weight:800;margin-top:8px}.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px;margin-top:18px}.section{background:#fff;border:1px solid #e5e7eb;border-radius:15px;padding:20px}.section h2{font-size:18px;margin:0 0 16px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px;border-bottom:1px solid #eef2f7;font-size:14px}th{color:#64748b;font-size:12px;text-transform:uppercase}.badge{padding:5px 9px;border-radius:20px;background:#dcfce7;color:#166534;font-size:12px}.free{background:#dbeafe;color:#1d4ed8}.btn{border:0;background:#2563eb;color:white;padding:10px 15px;border-radius:9px;cursor:pointer}.btn:hover{background:#1d4ed8}
+.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.room{padding:18px;border-radius:12px;border:1px solid #e5e7eb;background:#fff}.room b{display:block;margin-bottom:7px}.room small{color:#64748b}
+.form{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.form input,.form select{width:100%;padding:11px;border:1px solid #dbe1ea;border-radius:9px;background:#fff}.result{margin-top:18px;padding:18px;border-radius:12px;background:#eff6ff;border:1px solid #bfdbfe}
+.floor{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.floor div{padding:25px 10px;text-align:center;border-radius:12px;background:#dcfce7;border:1px solid #bbf7d0}.floor .busy{background:#fee2e2;border-color:#fecaca}
+.notice{padding:15px;background:#f8fafc;border-left:4px solid #2563eb;margin:9px 0;border-radius:7px}
+@media(max-width:850px){.side{width:190px}.main{margin-left:190px;width:calc(100% - 190px);padding:18px}.cards{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.rooms,.floor{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side"><div class="logo">Campus<span>Flow</span> AI</div>
+<div class="nav">
+<button class="active" onclick="show('dashboard',this)">📊 Dashboard</button>
+<button onclick="show('classrooms',this)">🏫 Classrooms</button>
+<button onclick="show('labs',this)">🧪 Labs</button>
+<button onclick="show('timetable',this)">📅 Timetable</button>
+<button onclick="show('allocation',this)">🤖 AI Allocation</button>
+<button onclick="show('floor',this)">🗺️ Floor Map</button>
+<button onclick="show('display',this)">📺 Display Board</button>
+<button onclick="show('reports',this)">📈 Reports</button>
+</div></aside>
+<main class="main">
+<div class="top"><h1 id="title">Dashboard</h1><div class="user">👤 Admin</div></div>
+
+<section id="dashboard" class="page active">
+<div class="cards">
+<div class="card"><div class="label">Total Classrooms</div><div class="num">54</div></div>
+<div class="card"><div class="label">Total Labs</div><div class="num">12</div></div>
+<div class="card"><div class="label">Running Classes</div><div class="num">18</div></div>
+<div class="card"><div class="label">Free Rooms</div><div class="num">16</div></div>
+</div>
+<div class="grid"><div class="section"><h2>Today's Schedule</h2><table><tr><th>Class</th><th>Subject</th><th>Room</th><th>Status</th></tr>
+<tr><td>CSE-A</td><td>DBMS</td><td>C-204</td><td><span class="badge">Running</span></td></tr>
+<tr><td>CSE-B</td><td>Operating Systems</td><td>C-205</td><td><span class="badge free">Upcoming</span></td></tr>
+<tr><td>AIML-A</td><td>Python Lab</td><td>LAB-03</td><td><span class="badge">Running</span></td></tr></table></div>
+<div class="section"><h2>System Status</h2><div class="notice">✓ Timetable synced successfully</div><div class="notice">✓ 16 classrooms currently available</div><div class="notice">✓ AI allocation engine ready</div></div></div>
+</section>
+
+<section id="classrooms" class="page"><div class="section"><h2>Classroom Management</h2><div class="rooms">
+<div class="room"><b>C-201</b><small>Capacity: 60</small><p><span class="badge">Available</span></p></div><div class="room"><b>C-202</b><small>Capacity: 60</small><p><span class="badge">Available</span></p></div><div class="room"><b>C-204</b><small>Capacity: 70</small><p><span class="badge" style="background:#fee2e2;color:#991b1b">Occupied</span></p></div><div class="room"><b>C-205</b><small>Capacity: 65</small><p><span class="badge free">Upcoming</span></p></div>
+</div></div></section>
+
+<section id="labs" class="page"><div class="section"><h2>Laboratory Management</h2><table><tr><th>Lab</th><th>Type</th><th>Capacity</th><th>Status</th></tr><tr><td>LAB-01</td><td>Computer Lab</td><td>60</td><td><span class="badge">Available</span></td></tr><tr><td>LAB-02</td><td>Networking Lab</td><td>50</td><td><span class="badge free">Upcoming</span></td></tr><tr><td>LAB-03</td><td>Programming Lab</td><td>60</td><td><span class="badge" style="background:#fee2e2;color:#991b1b">Occupied</span></td></tr></table></div></section>
+
+<section id="timetable" class="page"><div class="section"><h2>Today's Timetable</h2><table><tr><th>Time</th><th>Class</th><th>Subject</th><th>Room</th></tr><tr><td>09:00–10:00</td><td>CSE-A</td><td>DBMS</td><td>C-204</td></tr><tr><td>10:00–11:00</td><td>CSE-B</td><td>OS</td><td>C-205</td></tr><tr><td>11:00–12:00</td><td>AIML-A</td><td>Python</td><td>LAB-03</td></tr></table></div></section>
+
+<section id="allocation" class="page"><div class="section"><h2>AI Classroom Allocation</h2><p style="color:#64748b">Enter class requirements and let CampusFlow AI recommend the best available room.</p>
+<div class="form"><input id="cls" placeholder="Class (e.g. CSE-A)"><input id="students" type="number" placeholder="Students"><select id="type"><option>Classroom</option><option>Computer Lab</option></select></div><br><button class="btn" onclick="allocate()">✨ Find Best Room</button><div id="result"></div></div></section>
+
+<section id="floor" class="page"><div class="section"><h2>Floor Map – Block C</h2><div class="floor"><div>C-201<br><small>Available</small></div><div>C-202<br><small>Available</small></div><div class="busy">C-203<br><small>Occupied</small></div><div>C-204<br><small>Available</small></div><div>C-205<br><small>Upcoming</small></div><div>LAB-01<br><small>Available</small></div><div class="busy">LAB-02<br><small>Occupied</small></div><div>LAB-03<br><small>Available</small></div></div></div></section>
+
+<section id="display" class="page"><div class="section"><h2>Student Display Board</h2><div class="notice"><b>CSE-A</b> → DBMS → <b>C-204</b></div><div class="notice"><b>CSE-B</b> → Operating Systems → <b>C-205</b></div><div class="notice"><b>AIML-A</b> → Python Lab → <b>LAB-03</b></div></div></section>
+
+<section id="reports" class="page"><div class="cards"><div class="card"><div class="label">Room Utilization</div><div class="num">82%</div></div><div class="card"><div class="label">Allocation Success</div><div class="num">96%</div></div><div class="card"><div class="label">Available Labs</div><div class="num">5</div></div><div class="card"><div class="label">Conflicts Resolved</div><div class="num">14</div></div></div><div class="section" style="margin-top:18px"><h2>Allocation Summary</h2><p>CampusFlow AI balances room capacity, availability, room type and timetable conflicts to recommend suitable spaces.</p></div></section>
+</main></div>
+<script>
+const titles={dashboard:"Dashboard",classrooms:"Classrooms",labs:"Labs",timetable:"Timetable",allocation:"AI Allocation",floor:"Floor Map",display:"Display Board",reports:"Reports"};
+function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.getElementById('title').textContent=titles[id];}
+function allocate(){let c=document.getElementById('cls').value||"Selected Class",n=+document.getElementById('students').value||0,t=document.getElementById('type').value;let room=t==="Computer Lab"?"LAB-01":"C-201";document.getElementById('result').innerHTML='<div class="result">✨ <b>Recommended Allocation</b><br><br>Class: <b>'+c+'</b><br>Students: <b>'+n+'</b><br>Room: <b>'+room+'</b><br>Reason: Suitable capacity, room type and current availability.</div>'}
+</script>
+</body></html>
